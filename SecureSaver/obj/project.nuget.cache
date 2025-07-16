@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vn+P7mUBTYg=",
+  "success": true,
+  "projectFilePath": "/media/alek/outro/RepositóriosVisualCode/SecureSaver/SecureSaver/SecureSaver.csproj",
+  "expectedPackageFiles": [
+    "/home/alek/.nuget/packages/system.commandline/2.0.0-beta5.25306.1/system.commandline.2.0.0-beta5.25306.1.nupkg.sha512"
+  ],
+  "logs": []
+}
