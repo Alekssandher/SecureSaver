@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Vn+P7mUBTYg=",
+  "dgSpecHash": "6/RfdRK56m8=",
   "success": true,
   "projectFilePath": "/media/alek/outro/RepositóriosVisualCode/SecureSaver/SecureSaver/SecureSaver.csproj",
   "expectedPackageFiles": [
-    "/home/alek/.nuget/packages/system.commandline/2.0.0-beta5.25306.1/system.commandline.2.0.0-beta5.25306.1.nupkg.sha512"
+    "/home/alek/.nuget/packages/microsoft.net.illink.tasks/8.0.18/microsoft.net.illink.tasks.8.0.18.nupkg.sha512",
+    "/home/alek/.nuget/packages/system.commandline/2.0.0-beta5.25306.1/system.commandline.2.0.0-beta5.25306.1.nupkg.sha512",
+    "/home/alek/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/8.0.18/microsoft.netcore.app.runtime.linux-x64.8.0.18.nupkg.sha512",
+    "/home/alek/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/8.0.18/microsoft.aspnetcore.app.runtime.linux-x64.8.0.18.nupkg.sha512"
   ],
   "logs": []
 }

@@ -65,7 +65,7 @@ namespace SecureSaver.src.Utils
 
                 if (model.Operation.StartsWith("enc"))
                 {
-                    var data = File.ReadAllText(model.InputPath);
+                    var data = File.ReadAllBytes(model.InputPath);
                     byte[] result = Encrypt.EncryptData(
                         data,
                         ReadPassword(),
@@ -95,13 +95,13 @@ namespace SecureSaver.src.Utils
                     Console.WriteLine($"OutputPath: {model.OutputPath}");
                     Console.WriteLine($"Encrypted bytes count: {encryptedFile.Length}");
 
-                    string result = Decrypt.DecryptData(
+                    byte[] result = Decrypt.DecryptData(
                         encryptedFile,
                         ReadPassword(),
                         iterations
                     );
 
-                    File.WriteAllText(model.OutputPath, result);
+                    File.WriteAllBytes(model.OutputPath, result);
 
                     Console.WriteLine("File Decrypted and Saved Successfully.");
 
@@ -139,7 +139,7 @@ namespace SecureSaver.src.Utils
             Console.ResetColor();
             Environment.Exit(code);
         }
-        public static void CheckPaths(FileInfo _inputFile, FileInfo _outputFile)
+        private static void CheckPaths(FileInfo _inputFile, FileInfo _outputFile)
         {
             if (!_inputFile.Exists)
             {
@@ -155,7 +155,7 @@ namespace SecureSaver.src.Utils
             }
             return;
         }
-        public static string ReadPassword(string prompt = "Enter password: ")
+        private static string ReadPassword(string prompt = "Enter password: ")
         {
             Console.Write(prompt);
             var password = new StringBuilder();
@@ -182,18 +182,21 @@ namespace SecureSaver.src.Utils
         private static void SafeDeleteFile(string filePath)
         {
 
-            long fileSize = new FileInfo(filePath).Length;
-
-            byte[] randomData = new byte[fileSize];
-            Random random = new();
-            random.NextBytes(randomData);
-
-            using (FileStream fs = new(filePath, FileMode.Open, FileAccess.Write))
+            for (int i = 0; i < 5; i++)
             {
-                fs.Write(randomData, 0, randomData.Length);
-            }
+                long fileSize = new FileInfo(filePath).Length;
 
-            File.Delete(filePath);
+                byte[] randomData = new byte[fileSize];
+                Random random = new();
+                random.NextBytes(randomData);
+
+                using (FileStream fs = new(filePath, FileMode.Open, FileAccess.Write))
+                {
+                    fs.Write(randomData, 0, randomData.Length);
+                }
+
+                File.Delete(filePath);
+            }
 
             return;
 	    }
