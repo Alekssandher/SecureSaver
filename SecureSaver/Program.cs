@@ -11,19 +11,19 @@ class Program
             Description = "File to Encrypt"
         };
 
-        Option<FileInfo?> outputPath = new("--output", "-o")
+        Option<FileInfo> outputPath = new("--output", "-o")
         {
-            Required = false,
+            Required = true,
             Description = "Path to export the file after the operation."
         };
 
-        Option<int?> saltCount = new("--salts", "-sal") 
+        Option<int?> iterations = new("--iterations", "-itr")
         {
             Required = false,
             Description = "Number of Salts."
         };
 
-        
+
         Option<bool?> verbose = new("--verbose", "-v")
         {
             Required = false,
@@ -36,17 +36,25 @@ class Program
             Description = "Decrypt/Encrypt operation."
         };
 
+        Option<bool> overwriteOriginalFile = new("--overwriteOriginalFile", "-oof")
+        {
+            Required = false,
+            Description = "Overwrite the original file to safely erase the original data from device."
+        };
+
         RootCommand rootCommand = new("Your CLI Cryptographer/Decryptographer With AES-256");
 
 
         rootCommand.Options.Add(inputPath);
         rootCommand.Options.Add(outputPath);
-        rootCommand.Options.Add(saltCount);
+        rootCommand.Options.Add(iterations);
         rootCommand.Options.Add(verbose);
         rootCommand.Options.Add(operation);
+        rootCommand.Options.Add(overwriteOriginalFile);
 
-        return CheckArgs.Check(rootCommand.Parse(args));        
-        
+        CheckArgs.Check(rootCommand.Parse(args));
+
+        return 0;
     }
     
 }

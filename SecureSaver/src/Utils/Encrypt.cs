@@ -4,7 +4,7 @@ namespace SecureSaver.src.Utils
 {
     public class Encrypt
     {
-        public static byte[] EncryptData(string data, string password, int saltRounds )
+        public static byte[] EncryptData(string data, string password, int iterations )
         {
             using Aes aesAlg = Aes.Create();
             
@@ -14,7 +14,7 @@ namespace SecureSaver.src.Utils
             var key = new Rfc2898DeriveBytes(
                 password,
                 salt,
-                saltRounds,
+                iterations,
                 HashAlgorithmName.SHA256
             );
             

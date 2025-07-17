@@ -28,3 +28,4 @@
 /media/alek/outro/RepositóriosVisualCode/SecureSaver/SecureSaver/obj/Debug/net8.0/SecureSaver.pdb
 /media/alek/outro/RepositóriosVisualCode/SecureSaver/SecureSaver/obj/Debug/net8.0/SecureSaver.genruntimeconfig.cache
 /media/alek/outro/RepositóriosVisualCode/SecureSaver/SecureSaver/obj/Debug/net8.0/ref/SecureSaver.dll
+/media/alek/outro/RepositóriosVisualCode/SecureSaver/SecureSaver/obj/Debug/net8.0/SecureSaver.sourcelink.json
