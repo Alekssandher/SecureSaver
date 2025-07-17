@@ -1,9 +1,8 @@
 using System.Security.Cryptography;
-using System.Text;
 
 namespace SecureSaver.src.Utils
 {
-    public class Decrypt
+    public class DecryptFile
     {
         public static byte[] DecryptData(byte[] encryptedData, string password, int iterations)
         {

@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 
 namespace SecureSaver.src.Utils
 {
-    public class Encrypt
+    public class EncryptFile
     {
         public static byte[] EncryptData(byte[] data, string password, int iterations)
         {

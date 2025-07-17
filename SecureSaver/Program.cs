@@ -1,60 +1,72 @@
 ﻿using System.CommandLine;
+using System.Security.Cryptography;
+using SecureSaver.src.Services;
 using SecureSaver.src.Utils;
 
 class Program
 {
     static int Main(string[] args)
     {
-        Option<FileInfo> inputPath = new("--input", "-i")
+        var root = new RootCommand("Your CLI Cryptographer/Decryptographer With AES-256")
         {
-            Required = true,
-            Description = "File to Encrypt"
+            new Option<FileInfo>("--input", "-i"){ Required = true, Description = "File to Encrypt" },
+            new Option<FileInfo>("--output", "-o"){ Required = true, Description = "Path to export the file after the operation."},
+            new Option<string>("--operation", "-op"){ Required = true, Description = "Decrypt/Encrypt operation."},
+            new Option<int?>("--iterations", "-itr"){ Required = false, Description = "Number of iterations (leav blank for 500_000)."},
+            new Option<bool?>("--verbose", "-v"){ Required = false, Description = "Show more information on the terminal"},
+            new Option<bool>("--overwriteOriginalFile", "-oof"){ Required = false, Description = "Overwrite the original file to safely erase the original data from device."}
         };
 
-        Option<FileInfo> outputPath = new("--output", "-o")
+        try
         {
-            Required = true,
-            Description = "Path to export the file after the operation."
-        };
+            var model = ArgValidator.Validate(root.Parse(args));
 
-        Option<int?> iterations = new("--iterations", "-itr")
+            if (model.Operation.StartsWith("enc"))
+            {
+                EncryptionService.Encrypt(model);
+            }
+            else if (model.Operation.StartsWith("dec"))
+            {
+                EncryptionService.Decrypt(model);
+            }
+            else
+            {
+                Console.Error.WriteLine("Invalid operation. Use 'enc' or 'dec'.");
+                Environment.Exit(1);
+            }
+
+            Environment.Exit(0);
+        }
+        catch (DirectoryNotFoundException ex)
         {
-            Required = false,
-            Description = "Number of Salts."
-        };
-
-
-        Option<bool?> verbose = new("--verbose", "-v")
+            HandleEx(ex, 73);
+        }
+        catch (FileNotFoundException ex)
         {
-            Required = false,
-            Description = "Show more information on the terminal"
-        };
-
-        Option<string> operation = new("--operation", "-op")
+            HandleEx(ex, 66);
+        }
+        catch (UnauthorizedAccessException ex)
         {
-            Required = true,
-            Description = "Decrypt/Encrypt operation."
-        };
-
-        Option<bool> overwriteOriginalFile = new("--overwriteOriginalFile", "-oof")
+            HandleEx(ex, 77);
+        }
+        catch (CryptographicException ex)
         {
-            Required = false,
-            Description = "Overwrite the original file to safely erase the original data from device."
-        };
+            HandleEx(ex, 1);
+        }
+        catch (Exception ex)
+        {
+            HandleEx(ex, 1);
+        }
 
-        RootCommand rootCommand = new("Your CLI Cryptographer/Decryptographer With AES-256");
-
-
-        rootCommand.Options.Add(inputPath);
-        rootCommand.Options.Add(outputPath);
-        rootCommand.Options.Add(iterations);
-        rootCommand.Options.Add(verbose);
-        rootCommand.Options.Add(operation);
-        rootCommand.Options.Add(overwriteOriginalFile);
-
-        CheckArgs.Check(rootCommand.Parse(args));
 
         return 0;
+    }
+    private static void HandleEx(Exception ex, int code)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Error.WriteLine("Error: " + ex.Message);
+        Console.ResetColor();
+        Environment.Exit(code);
     }
     
 }
