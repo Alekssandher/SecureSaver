@@ -8,7 +8,7 @@ namespace SecureSaver.src.Services
         public static void Encrypt(Base model)
         {
             byte[] data = File.ReadAllBytes(model.InputPath);
-            byte[] encrypted = EncryptFile.EncryptData(data, PasswordReader.ReadPassword(), model.Iterations);
+            byte[] encrypted = EncryptFile.EncryptData(data, PasswordReader.ReadPasswordTwice(), model.Iterations);
 
             if (model.Overwrite)
                 FileService.SecureDelete(model.InputPath);

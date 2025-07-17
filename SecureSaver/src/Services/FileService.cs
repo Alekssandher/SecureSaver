@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace SecureSaver.src.Services
 {
@@ -14,6 +10,7 @@ namespace SecureSaver.src.Services
 
             long size = new FileInfo(path).Length;
             byte[] randomData = new byte[size];
+
             RandomNumberGenerator.Fill(randomData);
 
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Write))

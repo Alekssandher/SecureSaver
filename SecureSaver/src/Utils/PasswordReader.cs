@@ -23,5 +23,24 @@ namespace SecureSaver.src.Utils
             Console.Clear();
             return password.ToString();
         }
+
+        public static string ReadPasswordTwice(string prompt1 = "Enter password: ", string prompt2 = "Confirm password: ")
+        {
+            while (true)
+            {
+                Console.Write(prompt1);
+                var password1 = ReadPassword("");
+
+                Console.Write(prompt2);
+                var password2 = ReadPassword("");
+
+                if (password1 == password2)
+                    return password1;
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Passwords do not match. Please try again.\n");
+                Console.ResetColor();
+            }
+        }
     }
 }
