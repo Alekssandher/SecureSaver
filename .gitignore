@@ -1,6 +1,7 @@
 # Build results
 bin/
 obj/
+Debug/
 
 # User-specific files
 *.user
