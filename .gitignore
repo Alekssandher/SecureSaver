@@ -2,6 +2,8 @@
 bin/
 obj/
 Debug/
+dist/
+publish/
 
 # User-specific files
 *.user
