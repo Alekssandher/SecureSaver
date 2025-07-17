@@ -1,0 +1,42 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider and VS Code
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# Secret configs (ajuste conforme necessário)
+appsettings.*.json
+secrets.json
